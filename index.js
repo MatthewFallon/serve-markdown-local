@@ -29,9 +29,14 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 // Port to listen on
 const port = argv.port;
 
-// Change working directory if needed.
+let entryFile = "";
+
+// Change working directory if needed, and set entry file if provided.
 if (argv._[0] && existsSync(argv._[0]) && statSync(argv._[0]).isDirectory()) {
     process.chdir(resolve(argv._[0]));
+} else if (argv._[0] && existsSync(argv._[0]) && statSync(argv._[0]).isFile()) {
+    process.chdir(dirname(resolve(argv._[0])));
+    entryFile = basename(resolve(argv._[0]));
 }
 
 const resolveTitle = function (filePath) {
@@ -106,4 +111,4 @@ createServer((req, res) => {
 }).listen(port);
 
 // Opens in local browser
-open("http://localhost:" + port + "/");
+open("http://localhost:" + port + "/" + entryFile);

@@ -9,15 +9,15 @@ This server also supports a favicon placed at the root of the directory named `f
 The command can be installed globally and used with the format:
 
 ```
-mdlhost [--port <port-number>] [directory]
+mdlhost [--port <port-number>] [directory-or-file]
 ```
 
 or with npx:
 
 ```
-npx serve-markdown-local [--port <port-number>] [directory]
+npx serve-markdown-local [--port <port-number>] [directory-or-file]
 ```
 
-It takes an optional port to specify the port to run on and an optional directory to serve from or uses the cwd of the command.
+It takes an optional port to specify the port (defaults to 4000) to run on and an optional directory or file to serve from or uses the cwd of the command. If a file is provided the working directory will be treated as the direct parent directory of that file.
 
 This is only meant to be run locally for convenience and is not expected to handle any security operations.
