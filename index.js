@@ -17,6 +17,12 @@ const argv = yargs(hideBin(process.argv))
         type: 'number',
         default: 4000
     })
+    .option("single", {
+        alias: 's',
+        description: 'Open only a single file and close.',
+        type: "boolean",
+        default: false
+    })
     .alias('help', 'h')
     .example([
         ['mdlhost [directory]', 'Takes the given directory or cwd and runs a server on given port.']
@@ -53,8 +59,7 @@ const resolveTitle = function (filePath) {
     }
 }
 
-
-createServer((req, res) => {
+const server = createServer((req, res) => {
     let filePath = "";
     let urlPath = req.url.slice(1);
 
@@ -66,6 +71,11 @@ createServer((req, res) => {
     } else {
         filePath = urlPath;
     }
+
+    // If single flagged close server after css is finished returning.
+    if (urlPath.endsWith(".css") && argv.single) {
+        res.on("close", () => {server.close()})
+    };
 
     // If file is a folder, gets the Readme.md in folder
     if (existsSync(filePath) && statSync(filePath).isDirectory()) {
