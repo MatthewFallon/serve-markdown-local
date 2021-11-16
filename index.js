@@ -33,7 +33,7 @@ const argv = yargs(hideBin(process.argv))
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 // Port to listen on
-const port = argv.port;
+let port = argv.port;
 
 let entryFile = "";
 
@@ -118,7 +118,19 @@ const server = createServer((req, res) => {
             res.end(data);
         })
     }
-}).listen(port);
+});
 
-// Opens in local browser
-open("http://localhost:" + port + "/" + entryFile);
+server.on('listening', () => {
+    // Opens in local browser
+    open("http://localhost:" + port + "/" + entryFile);
+})
+
+server.on('error', (e) => {
+    if (e.code === 'EADDRINUSE') {
+        server.close();
+        port++;
+        server.listen(port)
+    }
+});
+
+server.listen(port);
