@@ -1,0 +1,21 @@
+{
+  "name": "serve-markdown-local",
+  "version": "1.0.0",
+  "description": "Hosts a local markdown server starting at the working directory. Relative links are expected.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "Matthew Fallon",
+  "license": "ISC",
+  "dependencies": {
+    "markdown-to-html": "^0.0.13",
+    "open": "^8.4.0",
+    "yargs": "^17.2.1"
+  },
+  "bin": {
+    "mdlhost": "./index.js"
+  }
+}
