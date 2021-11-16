@@ -17,5 +17,6 @@
   },
   "bin": {
     "mdlhost": "./index.js"
-  }
+  },
+  "repository": "https://github.com/MatthewFallon/serve-markdown-local"
 }
