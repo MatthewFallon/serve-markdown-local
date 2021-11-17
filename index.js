@@ -13,6 +13,11 @@ import sanitizeHtml from 'sanitize-html';
 // Common workaround to get the dirname
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
+// Port to listen on
+let port = argv.port;
+// Entry file from args if provided
+const entryFile = resolveEntryFile(argv._[0]);
+
 const server = createServer((req, res) => {
     const filePath = resolveFile(req.url.slice(1));
     const stylesheet = resolveStylesheet();
@@ -67,10 +72,5 @@ server.on('error', (e) => {
         server.listen(port)
     }
 });
-
-// Port to listen on
-let port = argv.port;
-// Entry file from args if provided
-const entryFile = resolveEntryFile(argv._[0]);
 
 server.listen(port);
