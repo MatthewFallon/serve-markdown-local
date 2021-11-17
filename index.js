@@ -2,16 +2,11 @@
 
 import { createServer } from "http";
 import { readFile } from "fs";
-import { dirname, join } from "path";
-import { fileURLToPath } from "url";
-import { resolveEntryFile, resolveFile, resolveTitle, resolveStylesheet } from "./fileResolver.js"
+import { resolveEntryFile, resolveFile, resolveTitle, resolveStylesheet, resolveHtmlFile } from "./fileResolver.js"
 import argv from "./cliArgs.js";
 import open from "open";
 import { marked } from "marked";
 import sanitizeHtml from 'sanitize-html';
-
-// Common workaround to get the dirname
-const __dirname = dirname(fileURLToPath(import.meta.url));
 
 // Port to listen on
 let port = argv.port;
@@ -38,7 +33,7 @@ const server = createServer((req, res) => {
                 return;
             }
             const htmlContent = sanitizeHtml(marked.parse(data));
-            readFile(join(__dirname, "template.html"), {encoding: "utf-8"}, (err, data) => {
+            readFile(resolveHtmlFile(), {encoding: "utf-8"}, (err, data) => {
                 let page = data;
                 page = page.replace("{{document-title}}", title);
                 page = page.replace("{{css-file}}", stylesheet);

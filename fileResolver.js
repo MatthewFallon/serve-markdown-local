@@ -2,6 +2,8 @@ import { existsSync, statSync } from "fs";
 import { basename, dirname, resolve, join, sep } from "path";
 import { fileURLToPath, pathToFileURL } from "url";
 
+// Common workaround to get the dirname
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const resolveEntryFile = function(fileArg) {
     let entryFile = "";
@@ -60,15 +62,29 @@ const resolveStylesheet = function () {
     if (existsSync("style.css")) {
         stylesheet = "/style.css";
     } else {
-        stylesheet = "http://localhost:" + port + "/" + pathToFileURL(join(__dirname, "style.css"));
+        stylesheet = "./" + pathToFileURL(join(__dirname, "style.css"));
     }
 
     return stylesheet;
+}
+
+const resolveHtmlFile = function() {
+    // Resolves absolute path to filesheet if needed.
+    let htmlFile = "";
+
+    if (existsSync("template.html")) {
+        htmlFile = "/template.html";
+    } else {
+        htmlFile = "./" + pathToFileURL(join(__dirname, "template.html"));
+    }
+
+    return htmlFile;
 }
 
 export {
     resolveEntryFile,
     resolveFile,
     resolveTitle,
-    resolveStylesheet
+    resolveStylesheet,
+    resolveHtmlFile
 }
