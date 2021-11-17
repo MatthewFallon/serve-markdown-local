@@ -6,6 +6,8 @@ This server supports a custom stylesheet placed at the root of the folders you w
 
 This server also supports a favicon placed at the root of the directory named `favicon.ico`
 
+This Server also supports a custom html template if desired. Place at root folder as `template.html`. The string `{{html-block}}` will be replaced with the html content. The string `{{document-title}}` will be replaced with the basename of the file or the name of the folder for README files. The string `{{css-file}}` will be replaced with the css file link for the href attribute.
+
 The command can be installed globally and used with the format:
 
 ```
