@@ -73,9 +73,9 @@ const resolveHtmlFile = function() {
     let htmlFile = "";
 
     if (existsSync("template.html")) {
-        htmlFile = "/template.html";
+        htmlFile = "template.html";
     } else {
-        htmlFile = "./" + pathToFileURL(join(__dirname, "template.html"));
+        htmlFile = join(__dirname, "template.html");
     }
 
     return htmlFile;
