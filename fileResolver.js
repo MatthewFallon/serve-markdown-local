@@ -62,7 +62,7 @@ const resolveStylesheet = function () {
     if (existsSync("style.css")) {
         stylesheet = "/style.css";
     } else {
-        stylesheet = "./" + pathToFileURL(join(__dirname, "style.css"));
+        stylesheet = "/" + pathToFileURL(join(__dirname, "style.css"));
     }
 
     return stylesheet;
