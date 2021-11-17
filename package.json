@@ -1,6 +1,6 @@
 {
   "name": "serve-markdown-local",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Hosts a local markdown server starting at the working directory. Relative links are expected.",
   "main": "index.js",
   "type": "module",
@@ -11,8 +11,9 @@
   "author": "Matthew Fallon",
   "license": "ISC",
   "dependencies": {
-    "markdown-to-html": "^0.0.13",
+    "marked": "^4.0.3",
     "open": "^8.4.0",
+    "sanitize-html": "^2.5.3",
     "yargs": "^17.2.1"
   },
   "bin": {
